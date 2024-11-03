@@ -35,7 +35,7 @@ async function signin(req , res){
     try {
         console.log("trying to signin...(backend)") ;
         const user = await UserService.signin({
-            email : req.body.username ,
+            email : req.body.email ,
             password : req.body.password ,
         })
         SuccessResponse.data = user ;
