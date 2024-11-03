@@ -49,11 +49,11 @@
             <form action="" id="loginForm"> <!-- Added ID for JS handling -->
                 <h1>Login</h1>
                 <div class="input-box">
-                    <input type="text" name="username" placeholder="Username" required> <!-- Added name attribute -->
-                    <i class='bx bxs-user'></i>
+                    <input type="email" name="email" placeholder="Email" required> <!-- Changed to email -->
+                    <i class='bx bxs-envelope'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required> <!-- Added name attribute -->
+                    <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bx-lock-alt'></i>
                 </div>
                 <div class="forgot-link">
@@ -72,18 +72,18 @@
 
         <!-- Updated registration form -->
         <div class="form-box register">
-            <form action="" id="signupForm"> <!-- Added ID for JS handling -->
+            <form action="" id="signupForm">
                 <h1>Register</h1>
                 <div class="input-box">
-                    <input type="text" name="username" placeholder="Username" required> <!-- Added name attribute -->
+                    <input type="text" name="username" placeholder="Username" required>
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="email" name="email" placeholder="Email" required> <!-- Added name attribute -->
+                    <input type="email" name="email" placeholder="Email" required>
                     <i class='bx bxs-envelope'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" name="password" placeholder="Password" required> <!-- Added name attribute -->
+                    <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bx-lock-alt'></i>
                 </div>
                 <button type="submit" class="btn">Register</button>
@@ -118,19 +118,18 @@
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
 
-        // Handle login form submission
+        // Handle login form submission with email
         loginForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent default form submission
 
             const formData = new FormData(loginForm);
-            const username = formData.get('username');
+            const email = formData.get('email'); // Changed to email
             const password = formData.get('password');
 
-            console.log('Login Details:', { username, password });
+            console.log('Login Details:', { email, password });
 
             try {
-                console.log("trying to signin , inside try block in index.html (frontend))") ;
-                const response = await axios.post('http://localhost:5000/signin', { username, password });
+                const response = await axios.post('http://localhost:5000/signin', { email, password });
                 console.log('Login successful', response.data);
                 // Handle successful login, e.g., redirecting to a dashboard
             } catch (error) {
