@@ -1,11 +1,11 @@
-const bcrypt = require("bcrypt") ;
-const {ServerConfig} = require("../config") ;
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
+const { ServerConfig } = require("../config") ;
+const bcrypt = require("bcrypt") ;
+
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
+  class User extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Users.init({
+  User.init({
     email:{
       type : DataTypes.STRING ,
       allowNull : false  ,
@@ -30,16 +30,16 @@ module.exports = (sequelize, DataTypes) => {
       validate :{
         len : [3,  50] ,
       }
-    } 
+    }
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'User',
   });
-  Users.beforeCreate(function encrypt(user){ // user is the js User object (that is input given by the user)
-    // console.log("password before encryption is -->" + user.password) ;
+  User.beforeCreate(function encrypt(user){ // user is the js User object (that is input given by the user)
+    console.log("password before encryption is -->" + user.password) ;
     const encryptedPassword = bcrypt.hashSync(user.password , +ServerConfig.SALT_ROUNDS) ; // this line is enough for encryption of the password 
     user.password = encryptedPassword ;
-    // console.log("password after encryption is -->" + user.password) ;
+    console.log("password after encryption is -->" + user.password) ;
   })
-  return Users;
+  return User;
 };

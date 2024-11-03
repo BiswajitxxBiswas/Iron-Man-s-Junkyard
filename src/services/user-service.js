@@ -7,6 +7,7 @@ const userRepository = new UserRepository() ;
 
 async function signup(data){
     try {
+        console.log("inside try in signup in user services") ;
         const user = await userRepository.create(data) ;
         return user ;       
     } catch (error) {
@@ -35,6 +36,7 @@ async function signin(data){
         // second step , if user exist then check for the password 
         const passwordMatch = await Auth.checkPassword(data.password , user.password) ;
         if(!passwordMatch){
+            console.log("inside if block of password match in user service ") ;
             throw new AppError("invalid password , try again " , StatusCodes.BAD_REQUEST) ;
         } 
 

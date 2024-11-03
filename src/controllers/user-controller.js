@@ -11,7 +11,7 @@ async function signup(req , res){
     try {
         const user = await UserService.signup({
             email : req.body.email ,
-            password : req.body.password ,
+            password : req.body.password , 
         }) 
         SuccessResponse.data = user ;
         return res.status(StatusCodes.CREATED)
@@ -33,11 +33,13 @@ async function signup(req , res){
 
 async function signin(req , res){
     try {
+        console.log("trying to signin...(backend)") ;
         const user = await UserService.signin({
-            email : req.body.email ,
+            email : req.body.username ,
             password : req.body.password ,
         })
         SuccessResponse.data = user ;
+        console.log("succesfully loged in ") ;
         return res.status(StatusCodes.CREATED)
                   .json(SuccessResponse)
     } catch (error) {
