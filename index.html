@@ -6,6 +6,9 @@
     <title>Login Register Form</title>
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <style>
         /* Video background styling */
         .background-video {
@@ -17,8 +20,6 @@
             object-fit: cover;
             z-index: -1; /* Behind content */
         }
-
-        
     </style>
 </head>
 <body>
@@ -36,25 +37,24 @@
             <a href="#">Services</a>
             <a href="#">Contact Us</a>
             <button class="btnLogin-popup">Login</button>
-
         </nav>
         <div class="menu-icon" onclick="toggleMenu()">
             <i class='bx bx-menu'></i>
         </div>
-        
     </header>
 
     <div class="container">
+        <!-- Updated login form -->
         <div class="form-box login">
-            <form action="">
+            <form action="" id="loginForm"> <!-- Added ID for JS handling -->
                 <h1>Login</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" required>
+                    <input type="text" name="username" placeholder="Username" required> <!-- Added name attribute -->
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
-                    <i class='bx bx-lock-alt' ></i>
+                    <input type="password" name="password" placeholder="Password" required> <!-- Added name attribute -->
+                    <i class='bx bx-lock-alt'></i>
                 </div>
                 <div class="forgot-link">
                     <a href="#">Forgot Password?</a>
@@ -62,36 +62,37 @@
                 <button type="submit" class="btn">Login</button>
                 <p>or login with social platforms</p>
                 <div class="social-icons">
-                    <a href="#"><i class='bx bxl-google' ></i></a>
-                    <a href="#"><i class='bx bxl-meta' ></i></a>
-                    <a href="#"><i class='bx bxl-github' ></i></a>
-                    <a href="#"><i class='bx bxl-linkedin-square' ></i></a>
+                    <a href="#"><i class='bx bxl-google'></i></a>
+                    <a href="#"><i class='bx bxl-meta'></i></a>
+                    <a href="#"><i class='bx bxl-github'></i></a>
+                    <a href="#"><i class='bx bxl-linkedin-square'></i></a>
                 </div>
             </form>
         </div>
 
+        <!-- Updated registration form -->
         <div class="form-box register">
-            <form action="">
+            <form action="" id="signupForm"> <!-- Added ID for JS handling -->
                 <h1>Register</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Username" required>
+                    <input type="text" name="username" placeholder="Username" required> <!-- Added name attribute -->
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="email" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email" required> <!-- Added name attribute -->
                     <i class='bx bxs-envelope'></i>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password" required>
-                    <i class='bx bx-lock-alt' ></i>
+                    <input type="password" name="password" placeholder="Password" required> <!-- Added name attribute -->
+                    <i class='bx bx-lock-alt'></i>
                 </div>
                 <button type="submit" class="btn">Register</button>
                 <p>or register with social platforms</p>
                 <div class="social-icons">
-                    <a href="#"><i class='bx bxl-google' ></i></a>
-                    <a href="#"><i class='bx bxl-meta' ></i></a>
-                    <a href="#"><i class='bx bxl-github' ></i></a>
-                    <a href="#"><i class='bx bxl-linkedin-square' ></i></a>
+                    <a href="#"><i class='bx bxl-google'></i></a>
+                    <a href="#"><i class='bx bxl-meta'></i></a>
+                    <a href="#"><i class='bx bxl-github'></i></a>
+                    <a href="#"><i class='bx bxl-linkedin-square'></i></a>
                 </div>
             </form>
         </div>
@@ -111,6 +112,55 @@
     </div>
 
     <script src="script.js"></script>
+
+    <script>
+        // Get references to the forms
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(loginForm);
+            const username = formData.get('username');
+            const password = formData.get('password');
+
+            console.log('Login Details:', { username, password });
+
+            try {
+                console.log("trying to signin , inside try block in index.html (frontend))") ;
+                const response = await axios.post('http://localhost:5000/signin', { username, password });
+                console.log('Login successful', response.data);
+                // Handle successful login, e.g., redirecting to a dashboard
+            } catch (error) {
+                console.error('Error while signin --> ', error);
+                // Handle error response, e.g., displaying an error message to the user
+            }
+        });
+
+        // Handle signup form submission
+        signupForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const formData = new FormData(signupForm);
+            const username = formData.get('username');
+            const email = formData.get('email');
+            const password = formData.get('password');
+
+            console.log('Signup Details:', { username, email, password });
+
+            try {
+                const response = await axios.post('http://localhost:5000/signup', { username, email, password });
+                console.log('Signup successful', response.data);
+                // Handle successful signup, e.g., redirecting to a welcome page
+            } catch (error) {
+                console.error('Error signing up:', error);
+                // Handle error response, e.g., displaying an error message to the user
+            }
+        });
+
+    </script>
 
 </body>
 </html>
