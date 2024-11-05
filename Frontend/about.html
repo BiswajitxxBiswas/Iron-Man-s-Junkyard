@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Register Form</title>
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Video background styling */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Behind content */
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <!-- Video background -->
+    <video class="background-video" autoplay muted loop>
+        <source src="iron.mkv" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <header>
+        <h2 class="logo">Logo</h2>
+        <nav class="navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact Us</a>
+
+        </nav>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class='bx bx-menu'></i>
+        </div>
+        
+    </header>
+
+    <div class="container-about">
+        
+        
+            <h1>Iron Man's Junkyard Heroes
+                <span>Transforming scrap into valuable resources</span>
+                
+            </h1>
+        
+        <section>
+            <h2>Our Mission</h2>
+            <p>Inspired by Tony Stark’s ability to turn scrap into life-saving technology, Iron Man's Junkyard Heroes is a revolutionary platform for scrap management. We empower customers and scrap dealers to make a real difference in recycling and sustainability by transforming waste into valuable resources.</p>
+            <p>Our mission is to make the scrap industry efficient, accessible, and impactful—saving resources, reducing waste, and maybe even sparking the creation of the next Iron Man suit!</p>
+            
+            <h2>Key Features</h2>
+            
+            <h3>Basic Features</h3>
+            <h4>For Customers:</h4>
+            <ul>
+                <li>Easy Registration: Create an account and join the scrap revolution.</li>
+                <li>Request Pickups: Schedule scrap pickup by selecting a preferred date and time.</li>
+                <li>Feedback and Ratings: Share feedback and rate the scrap dealer after your scrap is sold.</li>
+            </ul>
+    
+            <h4>For Scrap Dealers:</h4>
+            <ul>
+                <li>Dealer Access: Login with credentials provided by the admin and start accepting requests.</li>
+                <li>Billing System: Generate bills after purchasing scrap with itemized details for customer transparency.</li>
+                <li>Request History: Close completed requests for easy reference.</li>
+            </ul>
+    
+            <h4>For Admins:</h4>
+            <ul>
+                <li>Administrative Access: Manage key aspects of the platform.</li>
+                <li>Pricing Control: Set up and adjust prices for various scrap items.</li>
+            </ul>
+    
+            <h3>Advanced Features</h3>
+            <h4>For Customers:</h4>
+            <ul>
+                <li>Social Integration: Sign up quickly using Google or Facebook.</li>
+                <li>Social Sharing: Invite friends to the platform and spread the word on social media.</li>
+                <li>Flexible Scheduling: Provide multiple pickup date and time options.</li>
+            </ul>
+    
+            <h4>For Scrap Dealers:</h4>
+            <ul>
+                <li>Location-Based Service: Set operational locations to receive relevant customer requests.</li>
+                <li>Availability Status: Manage your availability with an online/offline toggle.</li>
+            </ul>
+    
+            <h4>For Admins:</h4>
+            <ul>
+                <li>Comprehensive Dashboard: Track daily purchases, request statuses, and customer feedback.</li>
+                <li>Notifications: Send timely alerts to customers and dealers.</li>
+            </ul>
+    
+            <h2>Join the Scrap Revolution</h2>
+            <p>At Iron Man's Junkyard Heroes, we believe that with the right tools, scrap can become something extraordinary. Join us today to help shape a sustainable future, where nothing goes to waste and every resource is used to its fullest potential. Together, we’ll make sure every piece of scrap is put to good use.</p>
+        </section>
+        
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
