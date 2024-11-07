@@ -11,7 +11,13 @@ module.exports = {
       },
       scrapRequestId: {
         type: Sequelize.INTEGER,
-        allowNull : false
+        allowNull: false,
+        references: {
+          model: 'ScrapRequests', // Reference to ScrapRequests table
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       totalAmount: {
         type: Sequelize.FLOAT,

@@ -1,27 +1,29 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class ScrapDealer extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here
+      
       this.hasMany(models.ScrapRequest , {
         foreignKey : "scrapDealerId" ,
         sourceKey : "id" ,
         onDelete : "CASCADE"
       })
+
+      this.belongsToMany(models.User, {
+        through: 'UserScrapDealers',
+        foreignKey: 'scrapDealerId',
+        otherKey: 'userId',
+      });
     }
   }
+
   ScrapDealer.init({
-    name:{
-      type : DataTypes.STRING ,
-      allowNull : false ,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -33,15 +35,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     operationalLocations: {
-      type: DataTypes.STRING, // Storing locations as JSONB (array of strings)
+      type: DataTypes.STRING, 
       allowNull: true,
     },
-    status : {
-      type : DataTypes.STRING ,
-    }
+    status: {
+      type: DataTypes.ENUM('online', 'offline'),
+      allowNull: false,
+      defaultValue: 'offline',
+    },
   }, {
     sequelize,
     modelName: 'ScrapDealer',
   });
+
   return ScrapDealer;
 };

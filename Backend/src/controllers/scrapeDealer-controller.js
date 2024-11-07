@@ -1,19 +1,19 @@
-const {UserService} = require("../services") ;
+const { ScrapDealerService } = require("../services") ;
 const {StatusCodes} = require("http-status-codes") ;
 const {SuccessResponse , ErrorResponse} = require("../utills/common") ;
 
 /**
- * POST /signup
+ * POST scrap/signup
  * req-body { email : abc@gmail.com , password : dsafjdgxjachv}
  */
 
 async function signup(req , res){
     try {
-        const user = await UserService.signup({
+        const user = await ScrapDealerService.signup({
             name : req.body.name,
             email : req.body.email ,
             password : req.body.password ,
-            contactNumber : req.body.contactNumber
+            operationalLocations : req.body.operationalLocations
         }) 
         SuccessResponse.data = user ;
         return res.status(StatusCodes.CREATED)
