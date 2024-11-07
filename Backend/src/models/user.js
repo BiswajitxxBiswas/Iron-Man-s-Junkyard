@@ -11,11 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
       this.hasMany(models.ScrapRequest , {
         foreignKey : "userId" ,
         sourceKey : 'id' ,
         onDelete:"CASCADE" ,
-      })
+      }) ;
+
+      this.belongsToMany(models.ScrapDealer, {
+        through: 'UserScrapDealers',
+        foreignKey: 'userId',
+        otherKey: 'scrapDealerId',
+      });
     }
   }
   User.init({
