@@ -3,3 +3,6 @@ node_modules/
 combined.log
 src/config/config.json
 rough.html
+tailwind.config.js
+dist/
+.parcel-cache/
