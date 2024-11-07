@@ -1,12 +1,16 @@
 const express = require('express');
 
-// const v1Routes = require('./v1');
-const signup = require("./signup") ;
-const signin = require("./signin") ;
+const sDealerRoutes = require('./scrapDealer-routes');
+const userRoutes = require('./user-routes');
 
 const router = express.Router();
 
-router.use('/signup', signup) ;
-router.use('/signin', signin) ;
+//Test
+const { feedbackController } =  require('../controllers');
+
+
+router.post('/feedback',feedbackController.createFeedback)
+router.use('/user',userRoutes);
+router.use('/sdealer',sDealerRoutes);
 
 module.exports = router;

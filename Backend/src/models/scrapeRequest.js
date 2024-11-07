@@ -20,6 +20,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'scrapDealerId',
         targetKey : 'id' ,
       });
+
+      this.hasOne(models.Bill, {
+        foreignKey: 'billId', 
+      });
+
     }
   }
   ScrapRequest.init({
@@ -39,6 +44,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('pending', 'completed', 'cancelled'),
       defaultValue: 'pending',
     },
+    billId: { 
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Bills',
+        key: 'id',
+      },
+    }
   }, {
     sequelize,
     modelName: 'ScrapRequest',

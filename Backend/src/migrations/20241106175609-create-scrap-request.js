@@ -27,6 +27,16 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
+      billId: {
+        type: Sequelize.INTEGER,
+        allowNull: true, // Allow null as the bill might not be created immediately
+        references: {
+          model: 'Bills', // Reference to Bills table
+          key: 'id',
+        },
+        onDelete: 'SET NULL',  // If a Bill is deleted, set billId to NULL
+        onUpdate: 'CASCADE',
+      },
       pickupDateTime: {
         type: Sequelize.DATE,
         allowNull: false,

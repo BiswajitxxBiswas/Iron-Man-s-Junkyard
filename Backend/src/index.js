@@ -18,5 +18,5 @@ app.get('/test', (req, res) => res.send('Server is running'));
 app.use('/', apiRoutes);
 
 app.listen(ServerConfig.PORT, () => {
-    console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
+    console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`); 
 });
