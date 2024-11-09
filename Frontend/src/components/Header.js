@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"; // Use Link for navigation
 
 const Header = () => {
   return (
-    <nav className="bg-gradient-to-r from-gray-800 to-black text-white p-6 shadow-lg">
+    <nav className="bg-gradient-to-r from-gray-800 to-black text-white p-6 shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="text-3xl font-semibold">
