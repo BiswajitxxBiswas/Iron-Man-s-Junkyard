@@ -369,3 +369,70 @@ form {
         padding: 13px 20px;
     }
 } */
+
+
+
+
+.shimmer-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+    padding: 24px;
+  }
+  
+  @media (min-width: 640px) {
+    .shimmer-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .shimmer-container {
+      grid-template-columns: repeat(4, 1fr); /* Display 4 cards per row on larger screens */
+    }
+  }
+  
+  .shimmer-card {
+    margin: 0;
+    width: 100%; /* Take full width of grid column */
+    height: 360px; /* Increase the height for a larger look */
+    background: #f0f0f0;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .shimmer-image {
+    width: 100%;
+    height: 180px; /* Increased height for larger size */
+    background-color: #c0bebe;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .shimmer-name {
+    width: 75%;
+    height: 24px; /* Increased height for a bolder look */
+    background-color: #c0bebe;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .shimmer-address {
+    width: 50%;
+    height: 20px;
+    background-color: #c0bebe;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .shimmer-rating {
+    width: 25%;
+    height: 20px;
+    background-color: #c0bebe;
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+  
+  
+  

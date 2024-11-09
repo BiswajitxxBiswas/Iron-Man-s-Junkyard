@@ -8,7 +8,11 @@ import Contact from "./components/Contact";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
 import AuthForm from "./components/AuthForm";
+import Footer from "./components/Footer";
 import Error from "./utils/Error"; // Add your Error component
+
+
+
 
 // Main Layout (Includes Header)
 function MainLayout() {
@@ -16,6 +20,7 @@ function MainLayout() {
     <div>
       <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 }
