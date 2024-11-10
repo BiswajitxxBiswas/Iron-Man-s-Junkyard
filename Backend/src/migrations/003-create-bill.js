@@ -1,19 +1,19 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Bills', {
       id: {
         allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
       scrapRequestId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'ScrapRequests', // Reference to ScrapRequests table
+          model: 'ScrapRequests',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -21,11 +21,11 @@ module.exports = {
       },
       totalAmount: {
         type: Sequelize.FLOAT,
-        allowNull : false
+        allowNull: false,
       },
       items: {
-        type: Sequelize.JSON, 
-        allowNull: false
+        type: Sequelize.JSON,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
