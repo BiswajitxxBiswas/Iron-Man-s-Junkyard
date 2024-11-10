@@ -24,18 +24,18 @@ module.exports = {
       },
       contactNumber: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       socialLogin: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
-      google_id: {
+      googleId: {
         type: Sequelize.STRING,
         allowNull: true,  // Allow Google ID to be null if not using Google login
       },
-      facebook_id: {
+      facebookId: {
         type: Sequelize.STRING,
         allowNull: true,  // Allow Facebook ID to be null if not using Facebook login
       },

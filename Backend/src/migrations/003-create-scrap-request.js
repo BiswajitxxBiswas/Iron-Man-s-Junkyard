@@ -29,13 +29,7 @@ module.exports = {
       },
       billId: {
         type: Sequelize.INTEGER,  // Integer Foreign Key
-        allowNull: true,
-        references: {
-          model: 'Bills',
-          key: 'id',
-        },
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
+        allowNull: true
       },
       pickupDateTime: {
         type: Sequelize.DATE,
