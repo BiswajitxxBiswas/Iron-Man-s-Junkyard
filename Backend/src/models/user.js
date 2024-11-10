@@ -30,16 +30,24 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,  // Allow null since social logins won't have a password
     },
     contactNumber: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     socialLogin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+    },
+    googleId: {
+      type: DataTypes.STRING,
+      allowNull: true,  // Google ID will be null if the user hasn't logged in with Google
+    },
+    facebookId: {
+      type: DataTypes.STRING,
+      allowNull: true,  // Facebook ID will be null if the user hasn't logged in with Facebook
     },
   }, {
     sequelize,
