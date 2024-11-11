@@ -4,24 +4,25 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class ScrapDealer extends Model {
     static associate(models) {
-      // Define associations here
-      this.hasMany(models.ScrapRequest, {
-        foreignKey: 'scrapDealerId',
-        sourceKey: 'id',
-        onDelete: 'CASCADE',
+      // define association here
+      // In ScrapDealer model
+      this.hasMany(models.ScrapItem, {
+        foreignKey: "scrapDealerId",
+        sourceKey: "id",
+        onDelete: "CASCADE",
       });
+
+      this.hasMany(models.ScrapRequest , {
+        foreignKey : "scrapDealerId" ,
+        sourceKey : "id" ,
+        onDelete : "CASCADE"
+      })
 
       this.belongsToMany(models.User, {
         through: 'UserScrapDealers',
         foreignKey: 'scrapDealerId',
         otherKey: 'userId',
       });
-
-      this.hasMany(models.UserScrapDealerFeedback, {
-        foreignKey: 'scrapDealerId',
-        onDelete: 'CASCADE',
-      });
-
     }
   }
 

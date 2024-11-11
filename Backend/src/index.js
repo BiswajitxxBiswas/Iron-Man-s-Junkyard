@@ -2,7 +2,6 @@ const express = require('express');
 const sessionMiddleware = require('./middlewares/session-middleware');
 const cors = require('cors');
 const path = require('path');
-
 const { ServerConfig } = require('./config');
 const apiRoutes = require('./routes');
 const { PassportMiddleware } = require('./middlewares');
@@ -21,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Apply the session middleware
-app.use(sessionMiddleware);  // Apply the session middleware correctly here
+app.use(sessionMiddleware);
 
 // Initialize Passport for authentication
 app.use(PassportMiddleware.initialize());
@@ -46,5 +45,5 @@ app.use('/', apiRoutes);
 
 // Start the server
 app.listen(ServerConfig.PORT,  () => {
-    console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
+    console.log(`Server Is Running SuccessFully On PORT ${ServerConfig.PORT}`);
 });

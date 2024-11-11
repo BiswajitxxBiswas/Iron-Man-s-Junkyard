@@ -53,14 +53,23 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('online', 'offline'),
         allowNull: false,
+        defaultValue: 'offline',  // Ensuring 'offline' is set as the default value
+      },
+      status: {
+        type: Sequelize.ENUM('online', 'offline'),
+        allowNull: false,
         defaultValue: 'offline',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
         type: Sequelize.DATE,
       }
     });

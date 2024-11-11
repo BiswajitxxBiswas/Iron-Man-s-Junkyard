@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
                 foreignKey: 'scrapDealerId',
                 targetKey: 'id',
             });
+            this.belongsTo(models.ScrapItem, {
+                foreignKey: 'scrapItemId',
+                targetKey: 'id',
+            });
             this.hasOne(models.Bill, {
                 foreignKey: 'scrapRequestId',
             });
@@ -24,28 +28,40 @@ module.exports = (sequelize) => {
 
     ScrapRequest.init({
         id: {
-            type: DataTypes.INTEGER,  // Integer Primary Key with Auto-Increment
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
         userId: {
-            type: DataTypes.INTEGER,  // Integer Foreign Key
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         scrapDealerId: {
-            type: DataTypes.INTEGER,  // Integer Foreign Key
+            type: DataTypes.INTEGER,
             allowNull: false,
+        },
+        scrapItemId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'ScrapItems',
+                key: 'id',
+            },
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,  // Ensure this is not nullable
         },
         pickupDateTime: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         status: {
             type: DataTypes.ENUM('pending', 'completed', 'cancelled'),
             defaultValue: 'pending',
         },
         billId: {
-            type: DataTypes.INTEGER,  // Integer Foreign Key
+            type: DataTypes.INTEGER,
             references: {
                 model: 'Bills',
                 key: 'id',

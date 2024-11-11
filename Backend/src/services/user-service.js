@@ -33,7 +33,7 @@ async function signin(data){
             throw new AppError("no user fund for the given email " , StatusCodes.NOT_FOUND) ;
         }
 
-        // second step , if user exist then check for the password  
+        // second step , if user exist then check for the password
 
         // const passwordMatch = await Auth.checkPassword(data.password , user.password) ;
         // if(!passwordMatch){

@@ -1,4 +1,5 @@
 const passport = require('passport');
+const express = require('express');
 const { PORT } = require('../config/server-config');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -13,7 +14,7 @@ passport.use(new GoogleStrategy({
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         console.log('Google profile:', profile);
-        console.log('Google profile ID:', profile.id);  // Log the googleId
+        console.log('Google profile ID:', profile.id);
 
         let user = await User.findOne({ where: { googleId: profile.id } });
 
@@ -34,7 +35,6 @@ passport.use(new GoogleStrategy({
     }
 }));
 
-
 // Facebook Strategy
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
@@ -46,16 +46,14 @@ passport.use(new FacebookStrategy({
         let user = await User.findOne({ where: { email: profile.emails[0].value } });
 
         if (!user) {
-            // Create new user if not found
             user = await User.create({
                 email: profile.emails[0].value,
                 name: profile.name.givenName + ' ' + profile.name.familyName,
-                facebook_id: profile.id, // Store Facebook ID
+                facebook_id: profile.id,
                 socialLogin: true,
             });
         } else {
-            // Update existing user
-            user.facebook_id = profile.id; // Store Facebook ID for existing users
+            user.facebook_id = profile.id;
             await user.save();
         }
 
@@ -78,8 +76,9 @@ passport.deserializeUser(async (id, done) => {
 
 // Custom Passport Middleware
 const PassportMiddleware = {
-    initialize: () => passport.initialize(),  // Initializes passport
-    session: () => passport.session(),        // Sets up passport session
+    initialize: () => passport.initialize(),
+    session: () => passport.session(),
+    authenticate: (strategy, options) => passport.authenticate(strategy, options),
 };
 
 module.exports = PassportMiddleware;
