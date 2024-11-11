@@ -26,29 +26,36 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    name:{
-      type : DataTypes.STRING , 
-      allowNull : false ,
-    } ,
-    email:{
-      type : DataTypes.STRING ,
-      unique : true ,
-      allowNull : false , 
-    } ,
-    password:{
-      type: DataTypes.STRING ,
-      allowNull : false ,
-    } ,
-    contactNumber:{
-      type:DataTypes.STRING ,
-      allowNull : false ,
-    } ,
-    socialLogin:{
-      type: DataTypes.BOOLEAN ,
-    } ,
-    feedback:{
-      type : DataTypes.STRING ,
-    } ,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: true,  // Allow null since social logins won't have a password
+    },
+    contactNumber: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    socialLogin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    googleId: {
+      type: DataTypes.STRING,
+      allowNull: true,  // Google ID will be null if the user hasn't logged in with Google
+    },
+    facebookId: {
+      type: DataTypes.STRING,
+      allowNull: true,  // Facebook ID will be null if the user hasn't logged in with Facebook
+    },
   }, {
     sequelize,
     modelName: 'User',

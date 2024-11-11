@@ -7,30 +7,37 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING , 
-        allowNull : false ,
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull : false ,
-        unique : true ,
+        allowNull: false,
+        unique: true,
       },
       password: {
-        type: Sequelize.STRING ,
-        allowNull : false ,
+        type: Sequelize.STRING,
+        allowNull: true,  // Password can now be null for social logins
       },
       contactNumber: {
-        type: Sequelize.STRING ,
-        allowNull : false ,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       socialLogin: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
-      feedback: {
-        type: Sequelize.STRING
+      googleId: {
+        type: Sequelize.STRING,
+        allowNull: true,  // Allow Google ID to be null if not using Google login
+      },
+      facebookId: {
+        type: Sequelize.STRING,
+        allowNull: true,  // Allow Facebook ID to be null if not using Facebook login
       },
       createdAt: {
         allowNull: false,

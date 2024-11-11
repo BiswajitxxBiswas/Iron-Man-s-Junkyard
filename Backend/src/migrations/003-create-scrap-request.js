@@ -1,31 +1,35 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('ScrapRequests', {
       id: {
         allowNull: false,
+        type: Sequelize.INTEGER,  // Integer Primary Key with Auto-Increment
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,  // Integer Foreign Key
         allowNull: false,
         references: {
-          model: 'Users', // Reference to Users table
+          model: 'Users',
           key: 'id',
         },
         onDelete: 'CASCADE',
       },
       scrapDealerId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,  // Integer Foreign Key
         allowNull: false,
         references: {
-          model: 'ScrapDealers', // Reference to ScrapDealers table
+          model: 'ScrapDealers',
           key: 'id',
         },
         onDelete: 'CASCADE',
+      },
+      billId: {
+        type: Sequelize.INTEGER,  // Integer Foreign Key
+        allowNull: true
       },
       pickupDateTime: {
         type: Sequelize.DATE,
