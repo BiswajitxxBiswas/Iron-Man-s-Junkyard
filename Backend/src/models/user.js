@@ -1,7 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { ServerConfig } = require("../config") ;
+const bcrypt = require("bcrypt") ;
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,11 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
       this.hasMany(models.ScrapRequest , {
         foreignKey : "userId" ,
         sourceKey : 'id' ,
         onDelete:"CASCADE" ,
-      })
+      }) ;
+
+      this.belongsToMany(models.ScrapDealer, {
+        through: 'UserScrapDealers',
+        foreignKey: 'userId',
+        otherKey: 'scrapDealerId',
+      });
+      
+      this.hasMany(models.UserScrapDealerFeedback, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE', // Delete feedbacks when the user is deleted
+      });
     }
   }
   User.init({
@@ -53,5 +65,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+  // User.beforeCreate(function encrypt(user){ // user is the js User object (that is input given by the user)
+  //   console.log("password before encryption is -->" + user.password) ;
+  //   const encryptedPassword = bcrypt.hashSync(user.password , +ServerConfig.SALT_ROUNDS) ; // this line is enough for encryption of the password 
+  //   user.password = encryptedPassword ;
+  //   console.log("password after encryption is -->" + user.password) ;
+  // })
   return User;
 };

@@ -5,7 +5,7 @@ const AppError = require("../utills/error/app-error") ;
 
 const UserScrapDealerRepository = new userScrapDealerRepository() ;
 
-async function  createFeedback(data) {
+async function createFeedback(data) {
     try {
         const response = await UserScrapDealerRepository.createFeedback(data);
         return response;

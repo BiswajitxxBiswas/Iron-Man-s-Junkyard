@@ -4,6 +4,7 @@ const sDealerRoutes = require('./scrapDealer-routes');
 const userRoutes = require('./user-routes');
 const  auth = require('./auth');
 const scrapRequestRoute = require('./scrapRequest-Routes');
+const userScrapDealerFeedbackRoutes = require("./userScrapDealerFeedback") ;
 
 const router = express.Router();
 

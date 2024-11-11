@@ -8,9 +8,7 @@ class crudRepository{
     }
 
     async create(data){ 
-        console.log("inside create function in crud repo") ;
         const response = await this.model.create(data) ;
-        console.log("type of response in create in crud repo ---> " + typeof response)
         return response ;
     }
     
