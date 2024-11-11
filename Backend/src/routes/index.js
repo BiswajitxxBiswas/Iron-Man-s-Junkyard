@@ -11,8 +11,8 @@ const router = express.Router();
 //Test
 const { feedbackController } =  require('../controllers');
 
-
-router.post('/feedback',feedbackController.createFeedback)
+router.use('/feedback',userScrapDealerFeedbackRoutes);
+// router.post('/feedback',feedbackController.createFeedback)
 router.use('/user',userRoutes);
 router.use('/sdealer',sDealerRoutes);
 router.use('/auth',auth);
