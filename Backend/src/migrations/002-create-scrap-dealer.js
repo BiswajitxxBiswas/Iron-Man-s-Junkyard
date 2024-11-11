@@ -26,16 +26,20 @@ module.exports = {
         type: Sequelize.STRING, // Store locations as JSONB (array of strings)
         allowNull: true,
       },
-      status : {
-        type : Sequelize.STRING ,
-      } ,
+      status: {
+        type: Sequelize.ENUM('online', 'offline'),
+        allowNull: false,
+        defaultValue: 'offline',  // Ensuring 'offline' is set as the default value
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },

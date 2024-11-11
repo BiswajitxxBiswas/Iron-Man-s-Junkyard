@@ -34,18 +34,18 @@ async function signin(data){
         }
 
         // second step , if user exist then check for the password 
-        const passwordMatch = await Auth.checkPassword(data.password , user.password) ;
-        if(!passwordMatch){
-            console.log("inside if block of password match in user service ") ;
-            throw new AppError("invalid password , try again " , StatusCodes.BAD_REQUEST) ;
-        } 
+        // const passwordMatch = await Auth.checkPassword(data.password , user.password) ;
+        // if(!passwordMatch){
+        //     console.log("inside if block of password match in user service ") ;
+        //     throw new AppError("invalid password , try again " , StatusCodes.BAD_REQUEST) ;
+        // }
 
         // now if both id and password is correct, then it's correct time to provide jwt token to user 
-        const jwt = await Auth.createToken({id : user.id , email : user.email}) ;
-        if(!jwt){
-            throw new AppError("something wrong while creating the jwt token  " , StatusCodes.INTERNAL_SERVER_ERROR) ;
-        }
-        return jwt ;
+        // const jwt = await Auth.createToken({id : user.id , email : user.email}) ;
+        // if(!jwt){
+        //     throw new AppError("something wrong while creating the jwt token  " , StatusCodes.INTERNAL_SERVER_ERROR) ;
+        // }
+        // return jwt ;
     } catch (error) {
         if(error instanceof AppError) throw error;
         console.log(error);

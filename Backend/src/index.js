@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Apply the session middleware
-app.use(sessionMiddleware);  // Apply the session middleware correctly here
+app.use(sessionMiddleware);
 
 // Initialize Passport for authentication
 app.use(PassportMiddleware.initialize());
@@ -43,9 +43,7 @@ app.use(PassportMiddleware.session());
 // API routes
 app.use('/', apiRoutes);
 
-
-
 // Start the server
 app.listen(ServerConfig.PORT,  () => {
-
+    console.log(`Server Is Running SuccessFully On PORT ${ServerConfig.PORT}`);
 });

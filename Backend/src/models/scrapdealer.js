@@ -5,7 +5,13 @@ module.exports = (sequelize, DataTypes) => {
   class ScrapDealer extends Model {
     static associate(models) {
       // define association here
-      
+      // In ScrapDealer model
+      this.hasMany(models.ScrapItem, {
+        foreignKey: "scrapDealerId",
+        sourceKey: "id",
+        onDelete: "CASCADE",
+      });
+
       this.hasMany(models.ScrapRequest , {
         foreignKey : "scrapDealerId" ,
         sourceKey : "id" ,
