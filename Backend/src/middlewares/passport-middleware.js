@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy({
                 googleId: profile.id,
                 email: profile.emails[0].value,
                 name: profile.displayName,
-                contactNumber: '70234561', // Placeholder or fallback value
+                // contactNumber: '70234561', // Placeholder or fallback value
             });
         }
 

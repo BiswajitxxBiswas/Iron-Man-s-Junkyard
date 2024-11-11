@@ -9,7 +9,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
 router.get('/google/callback',
     passport.authenticate('google', { failureRedirect: '/' }),
     (req, res) => {
-        res.redirect('/dashboard'); // Redirect after successful login
+        res.redirect('http://localhost:5500'); // Redirect after successful login
     }
 );
 
