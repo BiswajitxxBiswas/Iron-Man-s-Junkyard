@@ -2,7 +2,7 @@
 const UserScrapDealerFeedbackService = require('../services/userScrapDealerFeedbackService');
 
 class UserScrapDealerFeedbackController {
-  static async createFeedback(req, res) {
+   static async createFeedback(req, res) {
     try {
       const { scrapDealerId, userId, scrapRequestId, rating, comment } = req.body;
       const feedbackData = { scrapDealerId, userId, scrapRequestId, rating, comment };
@@ -13,11 +13,11 @@ class UserScrapDealerFeedbackController {
     }
   }
 
-  static async getFeedbackForDealer(req, res) {
+   static async getFeedbackForDealer(req, res) {
     try {
-      const { scrapDealerId } = req.params;
-      const feedback = await UserScrapDealerFeedbackService.getFeedbackForDealer(scrapDealerId);
-      res.status(200).json(feedback);
+        const scrapDealerId = req.params.scrapDealerId;
+        const feedback = await UserScrapDealerFeedbackService.getFeedbackForDealer(scrapDealerId);
+        res.status(200).json(feedback);
     } catch (error) {
       res.status(400).json({ message: error.message });
     }
@@ -25,8 +25,8 @@ class UserScrapDealerFeedbackController {
 
   static async getFeedbackForUser(req, res) {
     try {
-      const { userId } = req.params;
-      const feedback = await UserScrapDealerFeedbackService.getFeedbackForUser(userId);
+        const userId = req.params.userId;
+      const feedback = await UserScrapDealerFeedbackService.getFeedbackWithScrapRequest(userId);
       res.status(200).json(feedback);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -35,3 +35,4 @@ class UserScrapDealerFeedbackController {
 }
 
 module.exports = UserScrapDealerFeedbackController;
+

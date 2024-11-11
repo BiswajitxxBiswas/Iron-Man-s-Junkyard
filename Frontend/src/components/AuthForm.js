@@ -8,7 +8,7 @@ const AuthForm = () => {
   const [isActive, setIsActive] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setname] = useState("");
   const navigate = useNavigate();
 
   const toggleForm = () => setIsActive(!isActive);
@@ -16,7 +16,7 @@ const AuthForm = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/signin", {
+      const response = await axios.post("http://localhost:5000/user/signin", {
         email,
         password,
       });
@@ -30,8 +30,8 @@ const AuthForm = () => {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/signup", {
-        username,
+      const response = await axios.post("http://localhost:5000/user/signup", {
+        name,
         email,
         password,
       });
@@ -65,9 +65,9 @@ const AuthForm = () => {
               </h1>
               <input
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+                placeholder="name"
                 required
                 className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
               />

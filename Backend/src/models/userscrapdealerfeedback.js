@@ -13,21 +13,18 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.ScrapDealer, {
         foreignKey: 'scrapDealerId',
         onDelete: 'CASCADE', // Deletes feedback if scrap dealer is deleted
-        as: 'scrapDealer', // Alias for the relationship
       });
 
       // Associating UserScrapDealerFeedback with User (Customer)
       this.belongsTo(models.User, {
         foreignKey: 'userId',
-        onDelete: 'CASCADE', // Deletes feedback if user is deleted
-        as: 'customer', // Alias for the relationship
+        onDelete: 'CASCADE',
       });
 
       // Associating UserScrapDealerFeedback with ScrapRequest (optional)
       this.belongsTo(models.ScrapRequest, {
         foreignKey: 'scrapRequestId',
-        onDelete: 'CASCADE', // Deletes feedback if scrap request is deleted
-        as: 'scrapRequest', // Alias for the relationship
+        onDelete: 'CASCADE',
       });
     }
   }

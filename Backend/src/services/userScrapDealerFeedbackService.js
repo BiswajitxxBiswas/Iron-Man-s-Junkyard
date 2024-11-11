@@ -1,6 +1,7 @@
 // services/userScrapDealerFeedbackService.js
 
-const UserScrapDealerFeedbackRepository = require("../repositories/userScrapDealerFeedbackRepository")
+const UserScrapDealerFeedbackRepository = require("../repositories/userScrapDealerFeedbackRepository");
+const { UserScrapDealerFeedback, ScrapRequest } = require("../models");
 
 class UserScrapDealerFeedbackService {
   static async createFeedback(data) {
@@ -14,8 +15,17 @@ class UserScrapDealerFeedbackService {
     return await UserScrapDealerFeedbackRepository.getFeedbackByScrapDealer(scrapDealerId);
   }
 
-  static async getFeedbackForUser(userId) {
-    return await UserScrapDealerFeedbackRepository.getFeedbackByUser(userId);
+
+  static async getFeedbackWithScrapRequest(userId) {
+    // Use an async method to perform the query with the alias
+    return await UserScrapDealerFeedback.findAll({
+      where: { userId },
+      include: [
+        {
+          model: ScrapRequest,
+        },
+      ],
+    });
   }
 }
 
