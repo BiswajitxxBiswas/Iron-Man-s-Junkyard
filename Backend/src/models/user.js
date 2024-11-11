@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         otherKey: 'scrapDealerId',
       });
+      
+      this.hasMany(models.UserScrapDealerFeedback, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE', // Delete feedbacks when the user is deleted
+      });
     }
   }
   User.init({

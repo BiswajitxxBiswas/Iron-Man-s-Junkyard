@@ -2,7 +2,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-console.log(process.env. GOOGLE_CLIENT_ID, `-----------------------------`, process.env.GOOGLE_CLIENT_SECRET);
 
 module.exports = {
     PORT: process.env.PORT ,
