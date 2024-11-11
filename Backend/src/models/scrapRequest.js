@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
             this.hasOne(models.Bill, {
                 foreignKey: 'scrapRequestId',
             });
+            this.hasMany(models.UserScrapDealerFeedback, {
+                foreignKey: 'scrapRequestId',
+                onDelete: 'CASCADE',
+            });
         }
     }
 

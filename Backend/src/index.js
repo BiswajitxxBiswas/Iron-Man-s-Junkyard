@@ -2,6 +2,7 @@ const express = require('express');
 const sessionMiddleware = require('./middlewares/session-middleware');
 const cors = require('cors');
 const path = require('path');
+
 const { ServerConfig } = require('./config');
 const apiRoutes = require('./routes');
 const { PassportMiddleware } = require('./middlewares');
@@ -43,9 +44,7 @@ app.use(PassportMiddleware.session());
 // API routes
 app.use('/', apiRoutes);
 
-
-
 // Start the server
 app.listen(ServerConfig.PORT,  () => {
-
+    console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
 });
