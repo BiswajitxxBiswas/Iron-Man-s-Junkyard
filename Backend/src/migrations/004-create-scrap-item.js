@@ -30,6 +30,10 @@ module.exports = {
           key: 'id', // Refers to the id column in ScrapDealers
         },
       },
+      imageUrl: {
+        type: Sequelize.STRING, // URL of the image
+        allowNull: true, // Allows it to be nullable if no image is provided
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

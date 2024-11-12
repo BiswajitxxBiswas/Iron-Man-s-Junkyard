@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class ScrapItem extends Model {
     static associate = (models) => {
@@ -10,34 +9,39 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "id",
       });
     };
-
   }
+
   ScrapItem.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false, // To ensure name is not null
+      allowNull: false, // Ensures name is not null
     },
     price: {
       type: DataTypes.FLOAT,
-      allowNull: false, // To ensure price is not null
+      allowNull: false, // Ensures price is not null
     },
     quantity: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
-      allowNull: false, // To ensure quantity is not null
+      allowNull: false, // Ensures quantity is not null
     },
     scrapDealerId: {
       type: DataTypes.INTEGER, // Foreign key to ScrapDealers table
-      allowNull: true, // Ensure it's required
+      allowNull: true, // Allows it to be nullable if necessary
       references: {
         model: 'ScrapDealers', // Refers to the ScrapDealers table
         key: 'id', // Refers to the id column in ScrapDealers
       },
+    },
+    imageUrl: {
+      type: DataTypes.STRING, // URL of the image
+      allowNull: true, // Allows it to be nullable if no image is provided
     },
   }, {
     sequelize,
     modelName: 'ScrapItem',
     timestamps: true,
   });
+
   return ScrapItem;
 };
