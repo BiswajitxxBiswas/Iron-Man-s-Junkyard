@@ -28,11 +28,37 @@ header{
     z-index: 99;
     
 }
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Behind content */
+}
 .logo{
     margin-left: 10px;
     font-size: 2em;
     color: #fff;
     user-select: none;
+}
+
+.menu-icon {
+    margin-right: 10px;
+    display: none;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    
+}
+.register-menu-icon {
+    margin-right: 10px;
+    display: none;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    
 }
 
 .navigation a{
@@ -87,34 +113,6 @@ header{
 
 
 }
-.navigation .User-button{
-    width: 200px;
-    height: 50px;
-    background: #67c7eb;
-    border: 2px solid #fff;
-    border-radius: 6px;
-    outline: none;
-    box-shadow: none;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 40px;
-}
-.navigation .User-button:hover{
-    background: #fbca03;
-    color: #333;
-
-
-}
-.menu-icon {
-    margin-right: 10px;
-    display: none;
-    font-size: 28px;
-    color: #fff;
-    cursor: pointer;
-    /* overflow: hidden; */
-}
 
 
 .container{
@@ -127,7 +125,6 @@ header{
     margin: 20px;
     overflow: hidden;
 }
-
 .container-about {
     max-height: 80vh; /* Adjust this value as needed */
     overflow-y: auto;
@@ -144,6 +141,10 @@ header{
 
 }
 .container-about .active-popup{
+    transform: scale(1);
+
+}
+.register-container .active-popup{
     transform: scale(1);
 
 }
@@ -169,6 +170,10 @@ header{
 .form-box.register{
     visibility: hidden;
 }
+.form-box.register h1{
+  margin-top: 2px;
+
+}
 .container.active .form-box.register{
     visibility: visible;
 }
@@ -191,7 +196,7 @@ form{
     text-transform: uppercase;
     word-spacing: 1px;
     letter-spacing: 2px;
-    margin-bottom: 10px; 
+    margin-bottom: 10px; /* Adds space between h1 text and pseudo-elements */
 }
 
 .container-about h1 span {
@@ -205,13 +210,6 @@ form{
     word-spacing: 1px;
 }
 
-.container-about h1::before, .container-about h1::after {
-    position: relative;
-    bottom: -10px; /*Positions the pseudo-elements below the h1 text */
-    height: 4px;
-    content: "";
-    background-color: #ccc;
-}
 
 .container-about h1::after {
     left: 0;
@@ -224,47 +222,6 @@ form{
     left: 45px;
     width: 90px;
 }
-.container-login {
-    position: relative;
-    background: #b97d10; /* Background color to match the theme */
-    border-radius: 30px; /* Rounded corners */
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    display: flex; /* Use flexbox for alignment */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Center items vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    padding: 40px; /* Padding for spacing */
-    margin: 20px auto; /* Center the container with margin */
-}
-
-.container-login .question {
-    font-size: 24px; /* Font size for the question */
-    color: #333; /* Dark color for contrast */
-    margin-bottom: 20px; /* Spacing below the question */
-}
-
-.container-login .sell-button,
-.container-login .buy-button {
-    width: 150px; /* Width of the buttons */
-    height: 50px; /* Height of the buttons */
-    background: #6a0c0b; /* Background color for buttons */
-    color: #fff; /* Text color */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners for buttons */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 18px; /* Font size for button text */
-    margin: 10px; /* Margin between buttons */
-    transition: background 0.3s; /* Smooth transition for hover effect */
-}
-
-.container-login .sell-button:hover,
-.container-login .buy-button:hover {
-    background: #fbca03; /* Change background on hover */
-    color: #333; /* Change text color on hover */
-}
-
-
 
 
 .input-box{
@@ -321,6 +278,33 @@ form{
     font-size: 16px;
     color: #fff;
     font-weight: 600;
+    margin-top: 5%;
+}
+.seller-btn{
+    width: 100%;
+    height: 48px;
+    background: #6a0c0b;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 5%;
+}
+.scrap-btn{
+    width: 100%;
+    height: 48px;
+    background: #6a0c0b;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 5%;
 }
 
 .container p{
@@ -403,6 +387,14 @@ form{
     background: #67c7eb;
     border: 2px solid #fff;
     box-shadow: none;
+}
+.registration-btn{
+  width: 160px;
+    height: 46px;
+    background: #67c7eb;
+    border: 2px solid #fff;
+    box-shadow: none;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 650px){
@@ -487,3 +479,187 @@ form{
         display: block;
     }
 }
+.register-navigation a{
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: color 0.3s;
+}
+.register-navigation a:hover {
+    color: #f3ca20;
+}
+
+.register-navigation a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.register-navigation a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.register-navigation .btnLogin-popup{
+    width: 130px;
+    height: 50px;
+    background: #b97d10;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.register-navigation .btnLogin-popup:hover{
+    background: #fbca03;
+    color: #333;
+
+
+}
+
+.register-container {
+  position: relative;
+  max-width: 700px;
+  height: 500px;
+  width: 100%;
+  background: rgb(2,0,36);
+  background: linear-gradient(288deg, rgba(2,0,36,1) 0%, rgba(255,255,255,0.8631827731092436) 0%);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.register-container h1{
+    font-size: 36px;
+    text-align: center;
+    color: #6a0c0b;
+}
+
+
+.container .form {
+  margin-top: 30px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form .gender-box {
+  margin-top: 20px;
+}
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+.form .gender {
+  column-gap: 5px;
+}
+.gender input {
+  accent-color: rgb(130, 106, 251);
+}
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #333;
+}
+.address :where(input, .select-box) {
+  margin-top: 15px;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #67c7eb;
+}
+.form button:hover {
+  background: #2d7088;
+}
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+  header {
+    padding: 20px;
+}
+.register-navigation {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: calc(100vh - 80px);
+    align-items: center;
+}
+.register-navigation.active {
+    display: flex;
+}
+.register-menu-icon {
+    display: block;
+}
+}
+
