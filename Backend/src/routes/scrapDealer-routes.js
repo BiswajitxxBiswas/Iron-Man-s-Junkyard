@@ -5,6 +5,9 @@ const { ScrapeDealerController } = require('../controllers');
 const router = express.Router();
 
 router.post('/signup',ScrapeDealerController.signup);
+router.post('/signin',ScrapeDealerController.signin);
+router.patch('/logout',ScrapeDealerController.logOut);
+router.patch('/login',ScrapeDealerController.logIn);
 
 
 module.exports = router;
