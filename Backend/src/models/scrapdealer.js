@@ -70,7 +70,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.ENUM('online', 'offline'),
-      allowNull: false,
+      allowNull: true,
       defaultValue: 'offline',
     },
   }, {
