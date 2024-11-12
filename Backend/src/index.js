@@ -7,7 +7,7 @@ const apiRoutes = require('./routes');
 const { PassportMiddleware } = require('./middlewares');
 const openAi = require('./utills/common/OpenAi');
 
-const app = express(); 
+const app = express();
 
 // Enable CORS
 app.use(cors({ origin : `http://localhost:5500`, credentials : true}));
