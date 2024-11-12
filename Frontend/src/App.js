@@ -1,134 +1,153 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Products from "./components/Products";
-import CartContainer from "./user-dashboard-component/cart/CartContainer";
-import AuthForm from "./components/AuthForm";
-import Footer from "./components/Footer";
-import Error from "./utils/Error"; // Add your Error component
+import React, { useState } from 'react';
+import './App.css';
+import 'boxicons/css/boxicons.min.css';
+import ironVideo from './iron.mkv';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Register from './Register';
+import Home from './Home';
+import About from './About';
+import axios from 'axios';
 
-import ProfileContainer from "./user-dashboard-component/profile/ProfileContainer";
-import CartContainer from "./user-dashboard-component/cart/CartContainer";
-import Sidebar from "./user-dashboard-component/SideBar";
-import PurchaseHistoryContainer from "./user-dashboard-component/purchase-history/PurchaseContainer";
-import { AuthProvider } from "./utils/useAuth";
-import ProfileContainer from "./user-dashboard-component/profile/ProfileContainer";
-import PaymentMethods from "./user-dashboard-component/Payment/PaymentMethods";
+function App() {
+  const [isActive, setIsActive] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setname] = useState("");
+  const [menuActive, setMenuActive] = useState(false);
 
+  const handleRegisterClick = () => {
+    setIsActive(true);
+  };
 
+  const handleLoginClick = () => {
+    setIsActive(false);
+  };
 
-// Main Layout (Includes Header)
-function MainLayout() {
+  const toggleMenu = () => {
+    setMenuActive((prevMenuActive) => !prevMenuActive);
+  };
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/user/signin", {
+        email,
+        password,
+      });
+      console.log("Login successful", response);
+      // signIn();     // newLine
+      // navigate("/");
+    } catch (error) {
+      console.error("Error while signing in --> ", error);
+    }
+  };
+
+  
+  
+
   return (
-    <div>
-      <AuthProvider>
-      <Header />
-      <Outlet />
-      <Footer />
-      </AuthProvider>
-    </div>
+    <Router>
+      <div>
+        <video className="background-video" autoPlay muted loop>
+          <source src={ironVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <header>
+          <h2 className="logo">Logo</h2>
+          <nav className={`navigation ${menuActive ? 'active' : ''}`}>
+            <Link to="/">Home</Link>
+            
+            <Link to="/about">About</Link> 
+            <Link to="/services">Services</Link>
+            <Link to="/contact">Contact Us</Link>
+            <button className="btnLogin-popup" onClick={handleLoginClick}>Login</button>
+          </nav>
+          <div className="menu-icon" onClick={toggleMenu}>
+            <i className="bx bx-menu"></i>
+          </div>
+        </header>
+
+        <Routes>
+          {/* Home page route */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+
+          {/* Login/Register page route */}
+          <Route
+            path="/login"
+            element={
+              <div className={`container ${isActive ? 'active' : ''}`}>
+                <div className="form-box login">
+                  <form onSubmit={handleLogin}>
+                    <h1>Login</h1>
+                    <div className="input-box">
+                      <input type="text" placeholder="Username" required onChange={(e) =>setEmail(e.target.value)} />
+                      <i className="bx bxs-user"></i>
+                    </div>
+                    <div className="input-box">
+                      <input type="password" placeholder="Password" required 
+                      onChange={(e) =>setPassword(e.target.value)}/>
+                      <i className="bx bx-lock-alt"></i>
+                    </div>
+                    <div className="forgot-link">
+                      <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit" className="btn">Login</button>
+                    <p>or login with social platforms</p>
+                    <div className="social-icons">
+                      <a href="#"><i className="bx bxl-google"></i></a>
+                      <a href="#"><i className="bx bxl-meta"></i></a>
+                    </div>
+                  </form>
+                </div>
+
+                <div className="form-box register">
+                  <form>
+                    <div className="input-box">
+                      <input type="text" placeholder="E-mail" required onChange={(e) =>setname(e.target.value)} />
+                      <i className="bx bxs-gmail"></i>
+                    </div>
+                    <div className="input-box">
+                      <input type="text" placeholder="Username" required onChange={(e) =>setEmail(e.target.value)} />
+                      <i className="bx bxs-user"></i>
+                    </div>
+                    <div className="input-box">
+                      <input type="password" placeholder="Password" required 
+                      onChange={(e) =>setPassword(e.target.value)}/>
+                      <i className="bx bx-lock-alt"></i>
+                    </div>
+                    <Link to="/">
+                      <button type="button" className="registration-btn">Register</button>
+                    </Link>
+                    <h1>Register as</h1>
+                    <Link to="/register/scrap">
+                      <button type="button" className="scrap-btn">Scrap Dealer</button>
+                    </Link>
+                  </form>
+                </div>
+
+                <div className="toggle-box">
+                  <div className="toggle-panel toggle-left">
+                    <h1>Hello, Welcome!</h1>
+                    <p>Don't have an account?</p>
+                    <button className="btn register-btn" onClick={handleRegisterClick}>Register</button>
+                  </div>
+                  <div className="toggle-panel toggle-right">
+                    <h1>Welcome Back!</h1>
+                    <p>Already have an account?</p>
+                    <button className="btn login-btn" onClick={handleLoginClick}>Login</button>
+                  </div>
+                </div>
+              </div>
+            }
+          />
+
+          <Route path="/register/:type" element={<Register />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-// No Header Layout (For Authorization Form)
-function AuthLayout() {
-  return (
-    <div>
-      <AuthProvider>
-      <Outlet />
-      </AuthProvider>
-    </div>
-  );
-}
-
-function UserDashBoard() {
-  return (
-    <div className="flex min-h-screen bg-gray-100">
-      <AuthProvider>
-        {/* Sidebar */}
-        <Sidebar className="w-64 bg-gray-800 text-white p-4" />
-
-        {/* Main content area */}
-        <div className="flex-1 p-6">
-          <Outlet />
-        </div>
-      </AuthProvider>
-    </div>
-  );
-};
-
-// Define Routes
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/products",
-        element: <Products />,
-      },
-      {
-        path: "/cart",
-        element: <CartContainer />,
-      },
-    ],
-  },
-  {
-    path: "/auth",
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "/auth",
-        element: <AuthForm />,
-      },
-    ],
-  },
-  {
-    path: "/user",
-    element: <UserDashBoard/>,
-    children:[
-      {
-        path: "",
-        element: <ProfileContainer/>
-      },
-      {
-        path: "profile",
-        element : <ProfileContainer/>
-      },
-      {
-        path: "cart",
-        element: <CartContainer />
-      },
-      {
-        path: "payment",
-        element: <PaymentMethods />
-      },
-      {
-        path: "purchase-history",
-        element: <PurchaseHistoryContainer/>
-      },
-    ]
-  },
-  {
-    errorElement: <Error />,
-  },
-]);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+export default App;

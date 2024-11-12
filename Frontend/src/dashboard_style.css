@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, #e2e2e2, #c9d6ff)
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    
+}
+
+
+.navigation a{
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: color 0.3s;
+}
+.navigation a:hover {
+    color: #f3ca20;
+}
+
+.navigation a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+}
+
+.navigation a:hover::after{
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.navigation .btnLogin-popup{
+    width: 130px;
+    height: 50px;
+    background: #b97d10;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+}
+.navigation .btnLogin-popup:hover{
+    background: #fbca03;
+    color: #333;
+
+
+}
+
+
+
+header .btnLogout {
+    background-color: #6a0c0b;
+    color: #fff;
+    border: none;
+    margin-left: 20px;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.dashboard-container {
+    position: relative;
+    width: 850px;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0,0,0,.2);
+    margin: 20px;
+    
+    overflow: hidden;
+}
+.upload-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+    max-width: 810px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.upload-form label {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.upload-form input[type="file"],
+.upload-form input[type="text"],
+.upload-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.upload-form input[type="file"] {
+    border: none;
+}
+
+.upload-form textarea {
+    resize: vertical;
+}
+
+.upload-form .btn {
+    margin-top: 20px;
+    align-self: center;
+    background: #6a0c0b;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.upload-form .btn:hover {
+    background: #fbca03;
+}
+
+
+.content-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: calc(100% * 5); /* Adjust based on the number of sections */
+}
+
+.dashboard-section {
+    
+    min-width: 100%; /* Each section takes full screen width */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 20px; /* Space between sections */
+    border-radius: 5px;
+}
+
+
+table {
+    width: 100%;
+    max-width: 810px;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+.password-change-form{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+}
+
+.password-change-form .btn{
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 200px;
+    height: 46px;
+    background: #6a0c0b;
+    border: 2px solid #fff;
+    box-shadow: none;
+    color: #fff;
+}
