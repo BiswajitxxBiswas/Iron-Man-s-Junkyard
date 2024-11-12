@@ -53,8 +53,47 @@ async function signin(data){
     }
 }
 
+async function logOut(data){
+    try {
+        // console.log("inside try in signup in user services") ;
+        const user = await ScrapDealerRepository.updateLogout(data.email, { status: 'offline' }) ;
+        return user ;
+    } catch (error) {
+        if (error.name === "SequelizeValidationError") {
+            let explanation = [];
+
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+        }
+        console.log("error inside the user service in while logging out Dealer ---> " + error) ;
+        throw new AppError('User successfully logged out and status updated to offline.', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+async function logIn(data){
+    try {
+        // console.log("inside try in signup in user services") ;
+        const user = await ScrapDealerRepository.updateLogin(data.email, { status: 'online' }) ;
+        return user ;
+    } catch (error) {
+        if (error.name === "SequelizeValidationError") {
+            let explanation = [];
+
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+        }
+        console.log("error inside the user service in while logging in Dealer ---> " + error) ;
+        throw new AppError('User successfully logged in and status updated to online.', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
 
 module.exports = {
     signup ,
     signin ,
+    logOut,
+    logIn
 }

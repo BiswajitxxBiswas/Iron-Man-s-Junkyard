@@ -63,7 +63,7 @@ async function signup(req, res) {
 async function signin(req , res){
     try {
         console.log("trying to signin...(backend)") ;
-        const user = await UserService.signin({
+        const user = await ScrapDealerService.signin({
             email : req.body.email ,
             password : req.body.password ,
         })
@@ -80,7 +80,47 @@ async function signin(req , res){
     } 
 }
 
+async function logOut(req , res){
+    try {
+        console.log("trying to logging out...(backend)") ;
+        const user = await ScrapDealerService.logOut({
+            email : req.body.email ,
+        })
+        SuccessResponse.data = user ;
+        console.log("successfully logged out ") ;
+        return res.status(StatusCodes.CREATED)
+            .json(SuccessResponse)
+    } catch (error) {
+        console.log("inside logout in controller , error is ---> " + error );
+        ErrorResponse.error = error ;
+        return res
+            .status(error.statusCode)
+            .json(ErrorResponse) ;
+    }
+}
+
+async function logIn(req , res){
+    try {
+        console.log("trying to logging out...(backend)") ;
+        const user = await ScrapDealerService.logIn({
+            email : req.body.email ,
+        })
+        SuccessResponse.data = user ;
+        console.log("successfully logged in ") ;
+        return res.status(StatusCodes.CREATED)
+            .json(SuccessResponse)
+    } catch (error) {
+        console.log("inside login in controller , error is ---> " + error );
+        ErrorResponse.error = error ;
+        return res
+            .status(error.statusCode)
+            .json(ErrorResponse) ;
+    }
+}
+
 module.exports = {
     signup ,
-    signin
+    signin,
+    logOut,
+    logIn
 }

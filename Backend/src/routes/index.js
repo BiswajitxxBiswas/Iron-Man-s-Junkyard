@@ -16,7 +16,7 @@ const scrapItemRepository = require('../repositories/scrapItem-repository');
 router.use('/feedback',userScrapDealerFeedbackRoutes);
 // router.post('/feedback',feedbackController.createFeedback)
 router.use('/user',userRoutes);
-router.use('/sdealer',sDealerRoutes);
+router.use('/dealer',sDealerRoutes);
 router.use('/auth',auth);
 router.use('/request',scrapRequestRoute);
 router.get('/product' , ScrapItemController.getScrap) ;
