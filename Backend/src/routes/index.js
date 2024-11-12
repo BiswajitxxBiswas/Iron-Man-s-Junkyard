@@ -1,12 +1,21 @@
 const express = require('express');
 
-// const v1Routes = require('./v1');
-const signup = require("./signup") ;
-const signin = require("./signin") ;
+const sDealerRoutes = require('./scrapDealer-routes');
+const userRoutes = require('./user-routes');
+const  auth = require('./auth');
+const scrapRequestRoute = require('./scrapRequest-Routes');
+const userScrapDealerFeedbackRoutes = require("./userScrapDealerFeedback") ;
 
 const router = express.Router();
 
-router.use('/signup', signup) ;
-router.use('/signin', signin) ;
+//Test
+const { feedbackController } =  require('../controllers');
+
+router.use('/feedback',userScrapDealerFeedbackRoutes);
+// router.post('/feedback',feedbackController.createFeedback)
+router.use('/user',userRoutes);
+router.use('/sdealer',sDealerRoutes);
+router.use('/auth',auth);
+router.use('/request',scrapRequestRoute);
 
 module.exports = router;
