@@ -61,16 +61,14 @@ module.exports = {
         defaultValue: 'offline',
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
-        type: Sequelize.DATE,
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
-        type: Sequelize.DATE,
       }
     });
   },

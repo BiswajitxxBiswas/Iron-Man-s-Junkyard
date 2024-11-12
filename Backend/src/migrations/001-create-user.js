@@ -40,12 +40,14 @@ module.exports = {
         allowNull: true,  // Allow Facebook ID to be null if not using Facebook login
       },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: true,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       }
     });
   },
