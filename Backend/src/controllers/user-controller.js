@@ -13,7 +13,7 @@ async function signup(req , res){
             name : req.body.name,
             email : req.body.email ,
             password : req.body.password ,
-            contactNumber : req.body.contactNumber
+            // contactNumber : req.body.contactNumber
         }) 
         SuccessResponse.data = user ;
         return res.status(StatusCodes.CREATED)

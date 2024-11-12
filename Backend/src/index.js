@@ -7,7 +7,7 @@ const apiRoutes = require('./routes');
 const { PassportMiddleware } = require('./middlewares');
 const openAi = require('./utills/common/OpenAi');
 
-const app = express();
+const app = express(); 
 
 // Enable CORS
 app.use(cors({ origin : `http://localhost:5500`, credentials : true}));
@@ -26,22 +26,11 @@ app.use(sessionMiddleware);
 app.use(PassportMiddleware.initialize());
 app.use(PassportMiddleware.session());
 
-// Test route to check if the server is running
-// app.get('/test', (req, res) => res.send('Server is running'));
-
-// Session test route
-// app.get('/check-session', (req, res) => {
-//     if (!req.session.views) {
-//         req.session.views = 1; // Initialize session counter
-//     } else {
-//         req.session.views++; // Increment session counter
-//     }
-//
-//     res.send(`Session views: ${req.session.views}`);
-// });
-
 // API routes
 app.use('/', apiRoutes);
+
+// Test route to check if the server is running
+// app.get('/test', (req, res) => res.send('Server is running'));
 
 // Start the server
 app.listen(ServerConfig.PORT,  () => {

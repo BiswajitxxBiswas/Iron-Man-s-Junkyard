@@ -7,10 +7,10 @@ const userRepository = new UserRepository() ;
 
 async function signup(data){
     try {
-        console.log("inside try in signup in user services") ;
+        // console.log("inside try in signup in user services") ;
         const user = await userRepository.create(data) ;
         return user ;       
-    } catch (error) {
+    } catch (error) { 
         if (error.name == "SequelizeValidationError") {
             let explanation = [];
             

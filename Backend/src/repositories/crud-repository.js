@@ -3,12 +3,17 @@ const AppError = require("../utills/error/app-error");
 
 
 class crudRepository{
-    constructor(model){ 
+    constructor(model){
         this.model = model ;
     }
+    // console.log("inside crud repo") ;
+    // console.log("type of data in crud repo -->" + data.email)
 
-    async create(data){ 
+    async create(data){ // data will be in object form 
+        console.log("inside crud repo") ;
+        console.log("type of data in crud repo -->" + data.email)
         const response = await this.model.create(data) ;
+        console.log("respone in crud repo ------ "+response) ;
         return response ;
     }
     
