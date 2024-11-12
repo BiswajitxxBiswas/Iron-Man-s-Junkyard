@@ -20,6 +20,10 @@ import ProfileContainer from "./user-dashboard-component/profile/ProfileContaine
 import PaymentMethods from "./user-dashboard-component/Payment/PaymentMethods";
 import ProductDetail from "./components/ProductDetail";
 
+import DealerHeader from "./dealer-dashboard-component/DealerHeader";
+import ManageOrders from "./dealer-dashboard-component/ManageOrders";
+import ManageProducts from "./dealer-dashboard-component/ManageProducts";
+import UploadFiles from "./dealer-dashboard-component/UploadFiles";
 
 
 // Main Layout (Includes Header)
@@ -52,6 +56,16 @@ function UserDashBoard() {
         <div className="flex-1 p-6">
           <Outlet />
         </div>
+    </div>
+  );
+};
+
+
+function DealerDashBoard(){
+  return (
+    <div>
+      <DealerHeader/>
+      <Outlet/>
     </div>
   );
 };
@@ -121,6 +135,24 @@ const appRouter = createBrowserRouter([
       {
         path: "purchase-history",
         element: <PurchaseHistoryContainer/>
+      },
+    ]
+  },
+  {
+    path: "/dealer",
+    element: <DealerDashBoard/>,
+    children: [
+      {
+        path: "",
+        element: <UploadFiles/>
+      },
+      {
+        path: "manage-products",
+        element: <ManageProducts/>
+      },
+      {
+        path: "manage-orders",
+        element: <ManageOrders/>
       },
     ]
   },

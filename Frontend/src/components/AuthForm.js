@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../utils/useAuth";              // newLine
+import { useAuth } from "../utils/useAuth";
 
 const AuthForm = () => {
   const youtubeEmbedUrl =
     "https://www.youtube.com/embed/IhyDl3L_CaM?autoplay=1&loop=1&mute=1&playlist=IhyDl3L_CaM&controls=0&showinfo=0&modestbranding=1";
-  const [isActive, setIsActive] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);  // Determines if user is on login or signup form
+  const [isCustomer, setIsCustomer] = useState(true); // Determines if it's customer or seller
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setname] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
-
-  const { signIn } = useAuth();   // new Line
-
-  const toggleForm = () => setIsActive(!isActive);
+  const { signIn } = useAuth();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -24,8 +22,8 @@ const AuthForm = () => {
         password,
       });
       console.log("Login successful", response.data);
-      signIn();     // newLine
-      navigate("/");
+      signIn();
+      navigate(isCustomer ? "/" : "/dealer");
     } catch (error) {
       console.error("Error while signing in --> ", error);
     }
@@ -34,21 +32,27 @@ const AuthForm = () => {
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/user/signup", {
+      const endpoint = isCustomer 
+        ? "http://localhost:5000/user/signup" 
+        : "http://localhost:5000/sdealer/signup"; // Use different API for seller signup
+  
+      const response = await axios.post(endpoint, {
         name,
         email,
         password,
       });
+  
       console.log("Signup successful", response.data);
-      navigate("/auth");
+      navigate(isCustomer ? "/" : "/dealer");
     } catch (error) {
       console.error("Error signing up:", error);
     }
   };
+  
 
   return (
     <div className="relative h-screen overflow-hidden">
-      {/* Background video with blur */}
+      {/* Background video */}
       <iframe
         className="absolute top-0 left-0 w-full h-full object-cover filter blur-sm"
         src={youtubeEmbedUrl}
@@ -59,63 +63,11 @@ const AuthForm = () => {
         style={{ pointerEvents: "none" }}
       ></iframe>
 
-      {/* Blurred and semi-transparent form container */}
+      {/* Form container */}
       <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div className="bg-white bg-opacity-20 backdrop-blur-md p-8 rounded-lg shadow-xl w-full max-w-md mx-auto transform transition-all duration-300">
-          {isActive ? (
-            <form onSubmit={handleSignup} className="space-y-6">
-              <h1 className="text-2xl font-semibold text-center text-white">
-                Register
-              </h1>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-                placeholder="name"
-                required
-                className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
-              />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                required
-                className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
-              />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                required
-                className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
-              />
-              <button
-                type="submit"
-                className="w-full p-3 bg-blue-600 bg-opacity-90 text-white rounded"
-              >
-                Register
-              </button>
-              <p className="text-center text-white">
-                or register with social platforms
-              </p>
-              <div className="flex justify-center space-x-4 mt-4">
-                <a
-                  href="#"
-                 className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
-                >
-                  <i className="bx bxl-google text-red-600 text-2xl"></i>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
-                >
-                  <i className="bx bxl-meta text-blue-700 text-2xl"></i>
-                </a>
-              </div>
-            </form>
-          ) : (
+          {isLogin ? (
+            // Login form
             <form onSubmit={handleLogin} className="space-y-6">
               <h1 className="text-2xl font-semibold text-center text-white">
                 Login
@@ -136,51 +88,107 @@ const AuthForm = () => {
                 required
                 className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
               />
-              <button
-                type="submit"
-                className="w-full p-3 bg-blue-600 bg-opacity-90 text-white rounded"
-              >
-                Login
-              </button>
-              <p className="text-center text-white">
-                or login with social platforms
-              </p>
+              <div className="flex justify-between mt-4">
+                <button
+                  type="submit"
+                  className="w-full p-3 bg-blue-600 bg-opacity-90 text-white rounded"
+                >
+                  Login as {isCustomer ? "Customer" : "Seller"}
+                </button>
+              </div>
               <div className="flex justify-center space-x-4 mt-4">
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
+                <button
+                  type="button"
+                  onClick={() => setIsCustomer(true)}
+                  className="text-blue-300 hover:underline"
                 >
-                  <i className="bx bxl-google text-red-600 text-2xl"></i>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
+                  Login as Customer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsCustomer(false)}
+                  className="text-blue-300 hover:underline"
                 >
-                  <i className="bx bxl-meta text-blue-700 text-2xl"></i>
-                </a>
+                  Login as Seller
+                </button>
+              </div>
+            </form>
+          ) : (
+            // Register form
+            <form onSubmit={handleSignup} className="space-y-6">
+              <h1 className="text-2xl font-semibold text-center text-white">
+                Register
+              </h1>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name"
+                required
+                className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+                className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+                className="w-full p-3 bg-white bg-opacity-50 border border-gray-300 rounded text-white placeholder-white"
+              />
+              <div className="flex justify-between mt-4">
+                <button
+                  type="submit"
+                  className="w-full p-3 bg-blue-600 bg-opacity-90 text-white rounded"
+                >
+                  Register as {isCustomer ? "Customer" : "Seller"}
+                </button>
+              </div>
+              <div className="flex justify-center space-x-4 mt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsCustomer(true)}
+                  className="text-blue-300 hover:underline"
+                >
+                  Register as Customer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsCustomer(false)}
+                  className="text-blue-300 hover:underline"
+                >
+                  Register as Seller
+                </button>
               </div>
             </form>
           )}
 
           <div className="text-center mt-4 text-white">
-            {isActive ? (
+            {isLogin ? (
               <>
-                <p>Already have an account?</p>
+                <p>Don't have an account?</p>
                 <button
-                  onClick={toggleForm}
+                  onClick={() => setIsLogin(false)}
                   className="text-blue-300 hover:underline"
                 >
-                  Login
+                  Register
                 </button>
               </>
             ) : (
               <>
-                <p>Don't have an account?</p>
+                <p>Already have an account?</p>
                 <button
-                  onClick={toggleForm}
+                  onClick={() => setIsLogin(true)}
                   className="text-blue-300 hover:underline"
                 >
-                  Register
+                  Login
                 </button>
               </>
             )}
