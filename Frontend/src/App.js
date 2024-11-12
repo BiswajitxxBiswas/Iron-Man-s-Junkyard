@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './App.css';
 import 'boxicons/css/boxicons.min.css';
 import ironVideo from './iron.mkv';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Register from './Register';
 import Home from './Home';
 import About from './About';
+import Seller from './Seller' ; 
 import axios from 'axios';
+import NavBar from './Navbar';
 
 function App() {
   const [isActive, setIsActive] = useState(false);
@@ -14,6 +16,7 @@ function App() {
   const [password, setPassword] = useState("");
   const [name, setname] = useState("");
   const [menuActive, setMenuActive] = useState(false);
+  // const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     setIsActive(true);
@@ -21,6 +24,7 @@ function App() {
 
   const handleLoginClick = () => {
     setIsActive(false);
+    // navigate('/login');
   };
 
   const toggleMenu = () => {
@@ -46,6 +50,8 @@ function App() {
   
 
   return (
+
+    
     <Router>
       <div>
         <video className="background-video" autoPlay muted loop>
@@ -55,14 +61,7 @@ function App() {
 
         <header>
           <h2 className="logo">Logo</h2>
-          <nav className={`navigation ${menuActive ? 'active' : ''}`}>
-            <Link to="/">Home</Link>
-            
-            <Link to="/about">About</Link> 
-            <Link to="/services">Services</Link>
-            <Link to="/contact">Contact Us</Link>
-            <button className="btnLogin-popup" onClick={handleLoginClick}>Login</button>
-          </nav>
+          <NavBar toggleMenu={toggleMenu} menuActive={menuActive} />
           <div className="menu-icon" onClick={toggleMenu}>
             <i className="bx bx-menu"></i>
           </div>
