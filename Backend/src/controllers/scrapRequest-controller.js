@@ -17,7 +17,7 @@ const createScrapRequest = async (req, res) => {
         console.log("scrap item id -->"+ scrapItemId) ;
         const item = await ScrapItem.findOne({ 
             where: { 
-                id: 1 ,
+                id: scrapItemId ,
             } });
         console.log("item in create scrap request in controller = " + item) ;
         console.log("item.quantity = " + item.quantity) ;
