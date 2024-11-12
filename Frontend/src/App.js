@@ -18,6 +18,7 @@ import PurchaseHistoryContainer from "./user-dashboard-component/purchase-histor
 import { AuthProvider } from "./utils/useAuth";
 import ProfileContainer from "./user-dashboard-component/profile/ProfileContainer";
 import PaymentMethods from "./user-dashboard-component/Payment/PaymentMethods";
+import ProductDetail from "./components/ProductDetail";
 
 
 
@@ -25,11 +26,9 @@ import PaymentMethods from "./user-dashboard-component/Payment/PaymentMethods";
 function MainLayout() {
   return (
     <div>
-      <AuthProvider>
       <Header />
       <Outlet />
       <Footer />
-      </AuthProvider>
     </div>
   );
 }
@@ -38,9 +37,7 @@ function MainLayout() {
 function AuthLayout() {
   return (
     <div>
-      <AuthProvider>
       <Outlet />
-      </AuthProvider>
     </div>
   );
 }
@@ -48,7 +45,6 @@ function AuthLayout() {
 function UserDashBoard() {
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <AuthProvider>
         {/* Sidebar */}
         <Sidebar className="w-64 bg-gray-800 text-white p-4" />
 
@@ -56,7 +52,6 @@ function UserDashBoard() {
         <div className="flex-1 p-6">
           <Outlet />
         </div>
-      </AuthProvider>
     </div>
   );
 };
@@ -84,6 +79,10 @@ const appRouter = createBrowserRouter([
         element: <Products />,
       },
       {
+        path: "/product/:id",
+        element: <ProductDetail/>
+      },
+      {
         path: "/cart",
         element: <CartContainer />,
       },
@@ -94,8 +93,8 @@ const appRouter = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       {
-        path: "/auth",
-        element: <AuthForm />,
+        path: "",
+        element: <AuthForm />, // Added AuthForm to render inside AuthLayout
       },
     ],
   },
@@ -131,4 +130,8 @@ const appRouter = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <AuthProvider>
+    <RouterProvider router={appRouter} />
+  </AuthProvider>
+);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../utils/useAuth";              // newLine
 
 const AuthForm = () => {
   const youtubeEmbedUrl =
@@ -10,6 +11,8 @@ const AuthForm = () => {
   const [password, setPassword] = useState("");
   const [name, setname] = useState("");
   const navigate = useNavigate();
+
+  const { signIn } = useAuth();   // new Line
 
   const toggleForm = () => setIsActive(!isActive);
 
@@ -21,6 +24,7 @@ const AuthForm = () => {
         password,
       });
       console.log("Login successful", response.data);
+      signIn();     // newLine
       navigate("/");
     } catch (error) {
       console.error("Error while signing in --> ", error);
@@ -99,27 +103,15 @@ const AuthForm = () => {
               <div className="flex justify-center space-x-4 mt-4">
                 <a
                   href="#"
-                 className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
+                 className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
                 >
                   <i className="bx bxl-google text-red-600 text-2xl"></i>
                 </a>
                 <a
                   href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
+                  className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
                 >
                   <i className="bx bxl-meta text-blue-700 text-2xl"></i>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
-                >
-                  <i className="bx bxl-github text-gray-800 text-2xl"></i>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
-                >
-                  <i className="bx bxl-linkedin-square text-blue-600 text-2xl"></i>
                 </a>
               </div>
             </form>
@@ -156,27 +148,15 @@ const AuthForm = () => {
               <div className="flex justify-center space-x-4 mt-4">
                 <a
                   href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
+                  className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
                 >
                   <i className="bx bxl-google text-red-600 text-2xl"></i>
                 </a>
                 <a
                   href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
+                  className="flex items-center justify-center w-14 h-14 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
                 >
                   <i className="bx bxl-meta text-blue-700 text-2xl"></i>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
-                >
-                  <i className="bx bxl-github text-gray-800 text-2xl"></i>
-                </a>
-                <a
-                  href="#"
-                  className="flex items-center justify-center w-12 h-12 bg-transparent rounded-lg shadow-lg hover:bg-white transition-colors duration-300 transform hover:scale-105"
-                >
-                  <i className="bx bxl-linkedin-square text-blue-600 text-2xl"></i>
                 </a>
               </div>
             </form>

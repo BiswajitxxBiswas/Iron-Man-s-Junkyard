@@ -2,7 +2,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./SideBar";
-import { AuthProvider } from "../context/AuthContext"; // Auth context to wrap content
+import { AuthProvider } from "../utils/useAuth"; // Auth context to wrap content
 
 const UserDashBoard = () => {
   return (

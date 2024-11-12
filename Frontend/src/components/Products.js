@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { FaSun, FaMoon, FaSearch } from 'react-icons/fa';
+import { FaSun, FaMoon, FaSearch, FaCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Shimmer from '../utils/Shimmer';
+import { useNavigate } from 'react-router-dom';
+
 
 const ProductCard = ({ product, isNightMode }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${product.id}`, { state: { product } });
+  };
+
   return (
     <div
-      className={`${
-        isNightMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-      } shadow-lg rounded-lg p-6 transition-transform duration-300 ease-in-out hover:shadow-2xl hover:scale-105`}
+      onClick={handleClick}
+      className={`${isNightMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} 
+                  shadow-lg rounded-lg p-6 cursor-pointer transition-transform 
+                  duration-300 ease-in-out hover:shadow-2xl hover:scale-105`}
     >
-      <img
-        src={product.image}
-        alt={product.title}
-        className="h-64 w-full object-cover rounded-md mb-4"
-      />
+      <img src={product.image} alt={product.title} className="h-64 w-full object-cover rounded-md mb-4" />
       <div>
         <h2 className="text-lg font-semibold">{product.title}</h2>
-        <p className="mt-2">{product.description}</p>
-        <p className="text-blue-500 font-bold mt-2">${product.price}</p>
+        <div className="flex items-center mt-2">
+          <span className={`mr-2 ${product.status === 'online' ? 'text-green-500' : 'text-red-500'}`}></span>
+          <span>{product.status === 'online' ? 'Online' : 'Offline'}</span>
+        </div>
+        <h1 className="text-lg font-semibold">Dealer: {product.name}</h1>
+        <p className="text-blue-500 font-bold mt-2">Rs. {product.price}</p>
         <div className="flex items-center mt-2">
           <span className="text-yellow-400 mr-2">{'★'.repeat(Math.round(product.rating.rate))}</span>
           <span>{product.rating.count} reviews</span>
@@ -26,6 +36,7 @@ const ProductCard = ({ product, isNightMode }) => {
     </div>
   );
 };
+
 
 const ProductGrid = () => {
   const [listOfProducts, setListOfProducts] = useState([]);
@@ -68,7 +79,7 @@ const ProductGrid = () => {
                 type="text"
                 placeholder="Search products"
                 className={`pl-10 pr-4 py-2 rounded-lg outline-none transition-all duration-300 w-full shadow-md focus:shadow-lg ${
-                  isNightMode 
+                  isNightMode
                     ? 'bg-gray-700 text-white placeholder-gray-400 border-gray-600'
                     : 'bg-white text-gray-800 placeholder-gray-500 border-gray-300'
                 } focus:border-blue-500`}
