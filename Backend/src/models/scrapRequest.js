@@ -50,11 +50,12 @@ module.exports = (sequelize) => {
         },
         quantity: {
             type: DataTypes.INTEGER,
-            allowNull: false,  // Ensure this is not nullable
+            allowNull: false,
         },
         pickupDateTime: {
             type: DataTypes.DATE,
             allowNull: true,
+            defaultValue: DataTypes.NOW,
         },
         status: {
             type: DataTypes.ENUM('pending', 'completed', 'cancelled'),

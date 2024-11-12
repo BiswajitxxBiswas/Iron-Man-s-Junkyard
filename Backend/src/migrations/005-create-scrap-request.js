@@ -45,7 +45,8 @@ module.exports = {
       },
       pickupDateTime: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: Sequelize.NOW,
       },
       status: {
         type: Sequelize.ENUM('pending', 'completed', 'cancelled'),
@@ -60,7 +61,7 @@ module.exports = {
           key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL', // Set to null if Bill is deleted
+        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,
